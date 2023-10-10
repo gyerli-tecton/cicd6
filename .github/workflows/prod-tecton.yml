@@ -1,0 +1,32 @@
+name: Tecton Production CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    environment: 
+      name: Production    
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run tecton plan
+        run: echo I am running tecton plan on main branch
+    
+  apply:
+    needs: [plan]
+    if: github.event_name == 'pull_request' 
+    runs-on: ubuntu-latest
+    environment: 
+      name: Production
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run tecton apply
+        run: echo I am running tecton apply in Production environment
+      
