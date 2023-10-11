@@ -3,9 +3,9 @@ name: Tecton Development CI/CD
 on:
   push:
     branches: [ dev ]
-  pull_request:
-    branches: [ dev ]
-  workflow_dispatch:
+  # pull_request:
+  #   branches: [ dev ]
+  # workflow_dispatch:
 
 jobs:
   plan:
@@ -15,7 +15,7 @@ jobs:
 
       - name: Run tecton plan in DEV branch
         run: |
-          echo "Running plan with PROD_API_KEY: ${{ secrets.DEV_API_KEY }}"
+          echo "Running plan with DEV_API_KEY: ${{ secrets.DEV_API_KEY }}"
     
   apply:
     needs: [plan]
