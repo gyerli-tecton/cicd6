@@ -1,4 +1,4 @@
-name: tecton plan to Production CI/CD
+name: tecton plan/apply to Production CI/CD
 
 on:
   push:
