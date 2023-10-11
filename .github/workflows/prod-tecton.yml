@@ -10,13 +10,12 @@ on:
 jobs:
   plan:
     runs-on: ubuntu-latest
-    environment: 
-      name: Production    
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run tecton plan
-        run: echo I am running tecton plan on main branch      
+      - name: Run tecton plan in MAIN branch
+        run: |
+          echo "Running plan with PROD_API_KEY: ${{ secrets.PROD_API_KEY }}"
 
   apply:
     runs-on: ubuntu-latest
