@@ -1,11 +1,10 @@
-name: Tecton Development CI/CD
+name: Tecton CICD - plan/apply to dev
 
 on:
   push:
     branches: [ dev ]
   # pull_request:
   #   branches: [ dev ]
-  # workflow_dispatch:
 
 jobs:
   plan:

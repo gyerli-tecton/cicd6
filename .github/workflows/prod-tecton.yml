@@ -1,11 +1,10 @@
-name: tecton plan/apply to Production CI/CD
+name: Tecton CICD - plan/apply to main
 
 on:
   # push:
   #   branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:
 
 jobs:
   plan:
