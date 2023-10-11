@@ -1,10 +1,10 @@
 name: Tecton CICD - plan/apply to main
 
 on:
-  # push:
-  #   branches: [ main ]
-  pull_request:
+  push:
     branches: [ main ]
+  # pull_request:
+  #   branches: [ main ]
 
 jobs:
   plan:
