@@ -9,19 +9,57 @@ on:
 jobs:
   plan:
     runs-on: ubuntu-latest
+    environment:
+      name: Development
+    env:
+      TECTON_API_KEY: ${{ secrets.DEV_API_KEY }}
+      API_SERVICE: ${{ vars._DEV_API_SERVICE }}
+      WORKSPACE: ${{ vars.DEV_WORKSPACE }}
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run tecton plan in DEV branch
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: print dev plan variables
         run: |
-          echo "Running plan with DEV_API_KEY: ${{ secrets.DEV_API_KEY }}"
-    
+           echo $API_SERVICE
+           echo $WORKSPACE
+           echo $TECTON_API_KEY
+
+      - name: Install Tecton CLI
+        run: pip install -r requirements.txt
+
+      - name: Select workspace
+        run: tecton workspace select $WORKSPACE
+
   apply:
     needs: [plan]
     runs-on: ubuntu-latest
     environment: 
       name: Development
+    env:
+      TECTON_API_KEY: ${{ secrets.DEV_API_KEY }}
+      API_SERVICE: ${{ vars._DEV_API_SERVICE }}
+      WORKSPACE: ${{ vars.DEV_WORKSPACE }}
     steps:
-      - name: Apply development
-        run: echo I am running tecton apply in development environment
+        - uses: actions/checkout@v3
+
+        - uses: actions/setup-python@v4
+          with:
+            python-version: '3.9'
+            cache: 'pip'
+
+        - name: print dev apply variables
+          run: |
+            echo $API_SERVICE
+            echo $WORKSPACE
+            echo $TECTON_API_KEY
+        - name: Install Tecton CLI
+          run: pip install -r requirements.txt
+  
+        - name: Select workspace
+          run: tecton workspace select $WORKSPACE
       
